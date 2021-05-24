@@ -2,8 +2,9 @@ package com.jaudzems.edgars.moviesapp
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.jaudzems.edgars.moviesapp.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,9 +14,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://api.themoviedb.org/"
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityMainBinding
+    lateinit var movieAdapter: MovieAdapter
+    lateinit private var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.recyclerViewList.setHasFixedSize(true)
+        linearLayoutManager = LinearLayoutManager(this)
+        binding.recyclerViewList.layoutManager = linearLayoutManager
 
         getMyData()
     }
@@ -37,17 +48,21 @@ class MainActivity : AppCompatActivity() {
 
                 val responseBody = response.body()!!
 
-                val myStringBuilder = StringBuilder()
+                movieAdapter = MovieAdapter(baseContext, responseBody.results)
+                movieAdapter.notifyDataSetChanged()
+                binding.recyclerViewList.adapter = movieAdapter
 
-                for(myData in responseBody.results) {
-                    myStringBuilder.append(myData.title)
-                    myStringBuilder.append("\n")
-                }
-
-                val txt = findViewById<TextView>(R.id.txt)
-                txt.text = myStringBuilder
-
-                println(txt.text)
+//                val myStringBuilder = StringBuilder()
+//
+//                for(myData in responseBody.results) {
+//                    myStringBuilder.append(myData.title)
+//                    myStringBuilder.append("\n")
+//                }
+//
+//                val txt = findViewById<TextView>(R.id.txt)
+//                txt.text = myStringBuilder
+//
+//                println(txt.text)
 
 
             }
