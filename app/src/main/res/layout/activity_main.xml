@@ -27,8 +27,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="MoviesApp API"
-                android:textColor="@color/white"
+                android:text="Popular Movies"
+                android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -38,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Popular Movies"
-                android:textColor="@color/white" />
+                android:text="IMDB.com"
+                android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_list"

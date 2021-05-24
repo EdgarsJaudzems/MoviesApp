@@ -13,12 +13,13 @@
 
         <ImageView
             android:id="@+id/movie_image"
-            android:layout_width="57dp"
-            android:layout_height="98dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="84dp"
+            android:layout_height="142dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+<!--            android:paddingBottom="10dp"-->
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
