@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaudzems.edgars.moviesapp.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity(),MovieAdapter.OnItemClickListener {
 
     private fun recyclerViewSetup() {
         binding.recyclerViewList.setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(this)
+//        linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager = GridLayoutManager(this, 2)
         binding.recyclerViewList.layoutManager = linearLayoutManager
     }
 

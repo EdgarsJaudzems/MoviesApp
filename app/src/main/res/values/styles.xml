@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RoundedMinimum">
+        <item name="cornerSize">2.5%</item>
+    </style>
+
+    <style name="RoundedMedium">
+        <item name="cornerSize">5%</item>
+    </style>
+</resources>

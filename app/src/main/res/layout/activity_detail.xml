@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_launcher_background" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/movie_front_poster"
             android:layout_width="157dp"
             android:layout_height="230dp"
@@ -34,7 +34,10 @@
             app:layout_constraintHorizontal_bias="0.456"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+            tools:src="@drawable/ic_launcher_background"
+            app:shapeAppearanceOverlay="@style/RoundedMinimum"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"/>
 
         <TextView
             android:id="@+id/movie_title"

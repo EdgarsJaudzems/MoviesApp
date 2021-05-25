@@ -36,13 +36,13 @@ class DetailActivity : AppCompatActivity() {
         val moviePoster = IMAGE_BASE + intent.getStringExtra("intent_movie_poster")
 
         Glide.with(this)
-            .load(movieBackPoster.toString())
+            .load(movieBackPoster)
             .into(binding.movieBackPoster)
 
 //        binding.movieBackPoster.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f)})
 
         Glide.with(this)
-            .load(moviePoster.toString())
+            .load(moviePoster)
             .into(binding.movieFrontPoster)
     }
 }
