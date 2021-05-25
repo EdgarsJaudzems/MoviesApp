@@ -1,5 +1,7 @@
 package com.jaudzems.edgars.moviesapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -39,10 +41,20 @@ class DetailActivity : AppCompatActivity() {
             .load(movieBackPoster)
             .into(binding.movieBackPoster)
 
-//        binding.movieBackPoster.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f)})
-
         Glide.with(this)
             .load(moviePoster)
             .into(binding.movieFrontPoster)
+
+        //Button to movie website
+        val MOVIE_BASE = "https://www.themoviedb.org/movie/"
+
+        binding.movieButton.setOnClickListener {
+            val movieId = intent.getIntExtra("intent_movie_id",578701).toString()
+            val url = MOVIE_BASE + movieId
+
+            val buttonIntent = Intent(Intent.ACTION_VIEW)
+            buttonIntent.data = Uri.parse(url)
+            startActivity(buttonIntent)
+        }
     }
 }

@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity(),MovieAdapter.OnItemClickListener {
             .putExtra("intent_movie_release_date", movie.release_date)
             .putExtra("intent_movie_popularity", movie.popularity)
             .putExtra("intent_movie_vote_average", movie.vote_average)
+            .putExtra("intent_movie_id", movie.id)
         )
     }
 }
