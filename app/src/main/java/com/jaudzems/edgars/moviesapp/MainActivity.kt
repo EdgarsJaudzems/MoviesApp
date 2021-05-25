@@ -3,7 +3,7 @@ package com.jaudzems.edgars.moviesapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaudzems.edgars.moviesapp.databinding.ActivityMainBinding
@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity(),MovieAdapter.OnItemClickListener {
                 movieAdapter = MovieAdapter(baseContext, responseBody.results, this@MainActivity)
                 movieAdapter.notifyDataSetChanged()
                 binding.recyclerViewList.adapter = movieAdapter
+                binding.progressBar.visibility = View.GONE
             }
 
             override fun onFailure(call: Call<MovieData>, t: Throwable) {
@@ -64,9 +65,14 @@ class MainActivity : AppCompatActivity(),MovieAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(movie: Result) {
-        Toast.makeText(this, "${movie.title}", Toast.LENGTH_SHORT).show()
-
-        val intent = Intent(this,DetailActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this,DetailActivity::class.java)
+            .putExtra("intent_movie_poster", movie.poster_path)
+            .putExtra("intent_movie_backdrop_poster", movie.backdrop_path)
+            .putExtra("intent_movie_title", movie.title)
+            .putExtra("intent_movie_overview", movie.overview)
+            .putExtra("intent_movie_release_date", movie.release_date)
+            .putExtra("intent_movie_popularity", movie.popularity)
+            .putExtra("intent_movie_vote_average", movie.vote_average)
+        )
     }
 }
