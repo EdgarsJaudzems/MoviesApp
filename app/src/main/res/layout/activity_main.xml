@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:scaleY="4"
-                android:indeterminateTint="@color/design_default_color_primary"
+                android:indeterminateTint="#003b8e"
                 android:indeterminateBehavior="repeat"
                 android:indeterminate="true" />
 

@@ -28,7 +28,7 @@ class MovieAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var title = itemView.findViewById<TextView>(R.id.movie_title)
-        var releaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
+//        var releaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
         var poster = itemView.findViewById<ImageView>(R.id.movie_image)
 
         override fun onClick(v: View?) {
@@ -49,7 +49,7 @@ class MovieAdapter(
         val movie = movieList[position]
 
         holder.title.text = movie.title
-        holder.releaseDate.text = movie.release_date
+//        holder.releaseDate.text = movie.release_date
         Glide.with(holder.itemView)
             .load(IMAGE_BASE + movie.poster_path)
             .into(holder.poster)

@@ -6,7 +6,6 @@
     android:layout_width="wrap_content"
     android:layout_height="310dp"
     app:cardCornerRadius="4dp"
-    android:backgroundTint="@color/cardview_light_background"
     android:layout_margin="8dp" >
 
     <LinearLayout
@@ -19,11 +18,9 @@
             android:id="@+id/movie_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            app:shapeAppearanceOverlay="@style/RoundedMinimum"/>
+            android:scaleType="fitXY" />
 
         <TextView
-
             android:id="@+id/movie_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,13 +29,13 @@
             android:textSize="12sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/movie_release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Movie Release Date"
-            app:layout_constraintStart_toStartOf="@+id/movie_title"
-            app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+<!--        <TextView-->
+<!--            android:id="@+id/movie_release_date"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Movie Release Date"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/movie_title"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/movie_title" />-->
 
     </LinearLayout>
 
