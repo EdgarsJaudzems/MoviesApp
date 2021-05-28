@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.jaudzems.edgars.moviesapp.databinding.ActivityDetailBinding
 import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
 import com.jaudzems.edgars.moviesapp.network.RetrofitInterface
+import com.jaudzems.edgars.moviesapp.network.SingleMovieTrailer
 import com.jaudzems.edgars.moviesapp.network.SingleMoviedata
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,8 +29,43 @@ class DetailActivity : AppCompatActivity() {
         //MovieId Intent
         val movieId = intent.getIntExtra("intent_movie_id", 578701).toString()
 
-        getSingleMovieDetailData(movieId)
         loadIntentData()
+
+        getSingleMovieDetailData(movieId)
+        getSingleMovieTrailerData(movieId)
+
+    }
+
+    private fun getSingleMovieTrailerData(movieId: String) {
+        val retrofitInstance =
+            RetrofitInstance.getRetrofitInstance().create(RetrofitInterface::class.java)
+        val call = retrofitInstance.getTrailer(movieId)
+
+        call.enqueue(object : Callback<SingleMovieTrailer?> {
+            override fun onResponse(
+                call: Call<SingleMovieTrailer?>,
+                response: Response<SingleMovieTrailer?>
+            ) {
+                val trailerMovieResponse = response.body()!!
+                binding.movieTrailerText.text = trailerMovieResponse.results[0].name
+
+
+                binding.yotubeButton.setOnClickListener {
+                    val youtubeUrl = "https://www.youtube.com/watch?v="
+                    val movieTrailerKey = trailerMovieResponse.results[0].key
+                    val trailerUrl = youtubeUrl + movieTrailerKey
+
+                    val youtubeIntent = Intent(Intent.ACTION_VIEW)
+                    youtubeIntent.data = Uri.parse(trailerUrl)
+                    startActivity(youtubeIntent)
+                }
+
+            }
+
+            override fun onFailure(call: Call<SingleMovieTrailer?>, t: Throwable) {
+                    Log.d("DetailActivity", "onFailure" + t.message)
+            }
+        })
     }
 
     private fun getSingleMovieDetailData(movieId: String) {

@@ -60,6 +60,11 @@ dependencies {
     //RxJava
 //    implementation 'io.reactivex.rxjava3:rxjava:3.0.13-RC4'
 
+    //Youtube
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
