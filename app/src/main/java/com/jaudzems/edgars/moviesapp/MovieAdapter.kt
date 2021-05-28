@@ -15,11 +15,11 @@ class MovieAdapter(
     val listener: OnItemClickListener
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var itemView = LayoutInflater.from(context).inflate(R.layout.movie_item, parent, false)
         return ViewHolder(itemView)
     }
-
 
     override fun getItemCount(): Int {
         return movieList.size
@@ -28,11 +28,11 @@ class MovieAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var title = itemView.findViewById<TextView>(R.id.movie_title)
-//        var releaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
+        var releaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
         var poster = itemView.findViewById<ImageView>(R.id.movie_image)
 
         override fun onClick(v: View?) {
-            val position = adapterPosition
+            val position = absoluteAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(movieList[position])
             }
@@ -49,7 +49,7 @@ class MovieAdapter(
         val movie = movieList[position]
 
         holder.title.text = movie.title
-//        holder.releaseDate.text = movie.release_date
+        holder.releaseDate.text = movie.release_date.take(4)
         Glide.with(holder.itemView)
             .load(IMAGE_BASE + movie.poster_path)
             .into(holder.poster)
