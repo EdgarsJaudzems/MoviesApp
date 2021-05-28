@@ -4,7 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.jaudzems.edgars.moviesapp.databinding.ActivityDetailBinding
@@ -17,7 +17,7 @@ import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityDetailBinding
+    private lateinit var binding: ActivityDetailBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,16 +26,15 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //MovieId Intent
-        val movieId = intent.getIntExtra("intent_movie_id",578701).toString()
+        val movieId = intent.getIntExtra("intent_movie_id", 578701).toString()
 
         getSingleMovieDetailData(movieId)
         loadIntentData()
-
     }
 
-
     private fun getSingleMovieDetailData(movieId: String) {
-        val retrofitInstance = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface::class.java)
+        val retrofitInstance =
+            RetrofitInstance.getRetrofitInstance().create(RetrofitInterface::class.java)
         val call = retrofitInstance.getSingleMovieData(movieId)
 
         call.enqueue(object : Callback<SingleMoviedata?> {
@@ -45,15 +44,22 @@ class DetailActivity : AppCompatActivity() {
             ) {
                 val singleMovieResponse = response.body()!!
 
-                //Single movie EXTRA data
-                binding.movieTagline.text = singleMovieResponse.tagline
-
+                //Single movie EXTRA data -------------
+                //Tagline
+                if (singleMovieResponse.tagline != "") {
+                    binding.movieTaglineText.text = singleMovieResponse.tagline
+                } else {
+                    binding.movieTagline.visibility = (View.GONE)
+                    binding.movieTaglineText.visibility = (View.GONE)
+                }
                 //Genre
                 var genre = ""
                 for (value in singleMovieResponse.genres) {
                     genre += value.name + ", "
                 }
                 var movieGenres = genre.dropLast(2)
+
+                binding.movieGenreText.text = movieGenres
 
                 //Language
                 var languages = ""
@@ -62,10 +68,29 @@ class DetailActivity : AppCompatActivity() {
                 }
                 var movieLanguages = languages.dropLast(2)
 
-                Toast.makeText(this@DetailActivity, movieLanguages, Toast.LENGTH_LONG).show()
+                binding.movieLanguagesText.text = movieLanguages
 
+                //Budget
+                if (singleMovieResponse.budget != 0) {
+                    binding.movieBudgetText.text = ("${singleMovieResponse.budget.toString()}$")
+                } else {
+                    binding.movieBudgetText.text = "-"
+                }
 
+                //Revenue
+                if (singleMovieResponse.revenue != 0) {
+                    binding.movieRevenueText.text = ("${singleMovieResponse.revenue.toString()}$")
+                } else {
+                    binding.movieRevenueText.text = "-"
+                }
+
+                //Runtime
+                val runtime = singleMovieResponse.runtime
+                val runtimeHours = runtime / 60
+                val runtimeMinutes = runtime % 60
+                binding.movieRuntimeText.text = ("${runtimeHours}.${runtimeMinutes}h").toString()
             }
+
             override fun onFailure(call: Call<SingleMoviedata?>, t: Throwable) {
                 Log.d("DetailActivity", "onFailure" + t.message)
             }
@@ -78,22 +103,18 @@ class DetailActivity : AppCompatActivity() {
 
         // Textview intents
         binding.movieTitleText.text = intent.getStringExtra("intent_movie_title")
-        binding.movieReleaseDateShort.text = "(${intent.getStringExtra("intent_movie_release_date")
-            ?.take(4)})"
-
+        binding.movieReleaseDateShort.text = "(${
+            intent.getStringExtra("intent_movie_release_date")
+                ?.take(4)
+        })"
 
         binding.movieReleaseDateText.text = intent.getStringExtra("intent_movie_release_date")
-
-
         binding.movieOverviewText.text = intent.getStringExtra("intent_movie_overview")
 
-
-
-
-
-//        binding.movieReleaseDateShort.text = intent.getStringExtra("intent_movie_release_date")
-        binding.movieVoteCountText.text = intent.getDoubleExtra("intent_movie_vote_average",10.00).toString()
-        binding.moviePopularityText.text = intent.getDoubleExtra("intent_movie_popularity", 10.00).toString()
+        binding.movieVoteCountText.text =
+            intent.getDoubleExtra("intent_movie_vote_average", 10.00).toString()
+        binding.moviePopularityText.text =
+            intent.getDoubleExtra("intent_movie_popularity", 10.00).toString()
 
         // Image base url
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
@@ -113,7 +134,7 @@ class DetailActivity : AppCompatActivity() {
         val MOVIE_BASE = "https://www.themoviedb.org/movie/"
 
         binding.movieButton.setOnClickListener {
-            val movieId = intent.getIntExtra("intent_movie_id",578701).toString()
+            val movieId = intent.getIntExtra("intent_movie_id", 578701).toString()
             val url = MOVIE_BASE + movieId
 
             val buttonIntent = Intent(Intent.ACTION_VIEW)
