@@ -19,4 +19,29 @@
         app:srcCompat="@drawable/tmdb_logo_start"
         />
 
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="197dp"
+        android:layout_height="41dp"
+        android:text="Edgars Jaudzems"
+        android:textAlignment="center"
+        android:textColor="#62a694"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/madeBy"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="@+id/madeBy"
+        app:layout_constraintTop_toBottomOf="@+id/madeBy" />
+
+    <TextView
+        android:id="@+id/madeBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="made by"
+        android:textAlignment="center"
+        android:textColor="#84cca7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tmdb_logo_start" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

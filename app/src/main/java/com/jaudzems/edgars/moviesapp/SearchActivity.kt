@@ -25,9 +25,8 @@ class SearchActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar!!.title = "Search"
-
         val searchWord = intent.getStringExtra("search_query").toString()
+        supportActionBar!!.title = "Search results: ${searchWord}"
 
         searchMovieData(searchWord)
         setupHeaderToolbar()
