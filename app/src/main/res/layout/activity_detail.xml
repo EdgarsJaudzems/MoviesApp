@@ -82,6 +82,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:text="Movie Tagline Text"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_tagline" />
 
@@ -103,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="Overview text"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movie_overview"
             app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
@@ -125,16 +126,17 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="Movie Genre Text"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/movie_genre"
             app:layout_constraintTop_toBottomOf="@+id/movie_genre" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/movie_details_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:cardElevation="4dp"
+            android:backgroundTint="#00000000"
+            app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -150,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="Rating Image"
-                    android:src="@drawable/ic_baseline_star_24"
+                    android:src="@drawable/ic_baseline_star_outline_24"
                     app:layout_constraintEnd_toEndOf="@+id/movie_vote_count"
                     app:layout_constraintStart_toStartOf="@+id/movie_vote_count"
                     app:layout_constraintTop_toBottomOf="@+id/movie_vote_count" />
@@ -171,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="2020.01.01"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/imageYear"
                     app:layout_constraintStart_toStartOf="@+id/imageYear"
@@ -184,6 +186,7 @@
                     android:layout_marginStart="76dp"
                     android:layout_marginTop="16dp"
                     android:text="Release Date"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -195,7 +198,7 @@
                     android:layout_marginBottom="16dp"
                     android:text="8.1"
                     android:textAlignment="center"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/imageRating"
                     app:layout_constraintStart_toStartOf="@+id/imageRating"
@@ -207,6 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Rating"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.541"
@@ -215,9 +219,7 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!--    Details    -->
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/movie_details"
@@ -240,6 +242,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="Popularity"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/movie_front_poster"
             app:layout_constraintTop_toBottomOf="@+id/movie_details" />
@@ -259,6 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Budget"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/movie_popularity_text"
             app:layout_constraintTop_toBottomOf="@+id/movie_popularity_text" />
@@ -278,6 +282,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Runtime"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/movie_languages_text"
             app:layout_constraintTop_toBottomOf="@+id/movie_languages_text" />
@@ -297,6 +302,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Spoken languages"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/movie_revenue_text"
             app:layout_constraintTop_toBottomOf="@+id/movie_revenue_text" />
@@ -316,6 +322,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Revenue"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/movie_budget_text"
             app:layout_constraintTop_toBottomOf="@+id/movie_budget_text" />
@@ -334,8 +341,9 @@
             android:id="@+id/movie_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="More on Official TMDB website"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -347,29 +355,30 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/white"
             android:scaleType="fitCenter"
             android:src="@drawable/tmdb"
+            android:backgroundTint="#00000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/movie_id"
             app:layout_constraintStart_toStartOf="@+id/movie_id"
             app:layout_constraintTop_toBottomOf="@+id/movie_id"
             app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardviewYoutube"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#00000000"
             android:padding="16dp"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_front_poster">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="105dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movie_front_poster">
@@ -406,7 +415,7 @@
                     app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
