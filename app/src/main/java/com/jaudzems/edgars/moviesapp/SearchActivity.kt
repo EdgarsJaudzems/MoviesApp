@@ -1,36 +1,47 @@
 package com.jaudzems.edgars.moviesapp
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jaudzems.edgars.moviesapp.databinding.ActivityMainBinding
+import com.jaudzems.edgars.moviesapp.databinding.ActivitySearchBinding
 import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
 import com.jaudzems.edgars.moviesapp.network.RetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
+class SearchActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivitySearchBinding
     lateinit var movieAdapter: MovieAdapter
     lateinit private var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar!!.title = "Search"
+
+        val searchWord = intent.getStringExtra("search_query").toString()
+
+        searchMovieData(searchWord)
+        setupHeaderToolbar()
         recyclerViewSetup()
-        getPopularMovieData()
+    }
+
+    private fun setupHeaderToolbar() {
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun recyclerViewSetup() {
@@ -39,10 +50,10 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         binding.recyclerViewList.layoutManager = linearLayoutManager
     }
 
-    private fun getPopularMovieData() {
+    private fun searchMovieData(search: String) {
         val retrofitInstance =
             RetrofitInstance.getRetrofitInstance().create(RetrofitInterface::class.java)
-        val call = retrofitInstance.getPopularMovieData()
+        val call = retrofitInstance.searchMovies("73619d549f33ccdf0116452a1f3f9427", search)
 
         call.enqueue(object : Callback<MovieData> {
             override fun onResponse(
@@ -51,14 +62,14 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
             ) {
                 val responseBody = response.body()!!
 
-                movieAdapter = MovieAdapter(baseContext, responseBody.results, this@MainActivity)
+                movieAdapter = MovieAdapter(baseContext, responseBody.results, this@SearchActivity)
                 movieAdapter.notifyDataSetChanged()
                 binding.recyclerViewList.adapter = movieAdapter
                 binding.progressBar.visibility = View.GONE
             }
 
             override fun onFailure(call: Call<MovieData>, t: Throwable) {
-                Log.d("MainActivity", "onFailure" + t.message)
+                Log.d("SearchActivity", "onFailure" + t.message)
             }
         })
     }
@@ -75,39 +86,5 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
                 .putExtra("intent_movie_popularity", movie.popularity)
                 .putExtra("intent_movie_vote_average", movie.vote_average)
         )
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu,menu)
-
-        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchItem = menu?.findItem(R.id.search)
-        val searchView = searchItem?.actionView as SearchView
-
-        searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                searchView.setQuery("", false)
-                searchItem.collapseActionView()
-
-//                Toast.makeText(this@MainActivity,"look $query", Toast.LENGTH_LONG).show()
-
-                startActivity(
-                    Intent(this@MainActivity, SearchActivity::class.java)
-                        .putExtra("search_query", query)
-                )
-
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
-        return true
     }
 }

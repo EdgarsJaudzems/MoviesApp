@@ -29,7 +29,7 @@ data class SingleMoviedata(
 )
 
 data class Genre(
-//    val id: Int,
+    val id: Int,
     val name: String
 )
 
