@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var itemView = LayoutInflater.from(context).inflate(R.layout.movie_item, parent, false)
+
         return ViewHolder(itemView)
     }
 
@@ -27,6 +29,7 @@ class MovieAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
+
         var title = itemView.findViewById<TextView>(R.id.movie_title)
         var releaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
         var poster = itemView.findViewById<ImageView>(R.id.movie_image)
@@ -46,6 +49,8 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
+//        holder.poster.startAnimation(AnimationUtils.loadAnimation(context, R.anim.recycler_animation))
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.recycler_animation))
         val movie = movieList[position]
 
         holder.title.text = movie.title

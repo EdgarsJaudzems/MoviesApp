@@ -17,12 +17,12 @@ class StartScreenActivity : AppCompatActivity() {
 
         author.alpha = 0f
         madeBy.alpha = 0f
-        author.animate().setDuration(1500).alpha(1f)
-        madeBy.animate().setDuration(1500).alpha(1f)
+        author.animate().setDuration(2000).alpha(1f)
+        madeBy.animate().setDuration(2000).alpha(1f)
 
 
         startScreenLogo.alpha = 0f
-        startScreenLogo.animate().setDuration(1500).alpha(1f).rotationYBy(360f).withEndAction {
+        startScreenLogo.animate().setDuration(1000).alpha(1f).rotationYBy(360f).withEndAction {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
