@@ -1,4 +1,4 @@
-package com.jaudzems.edgars.moviesapp
+package com.jaudzems.edgars.moviesapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,13 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jaudzems.edgars.moviesapp.R
+import com.jaudzems.edgars.moviesapp.Result
 
 class MovieAdapter(
     val context: Context,
     val movieList: List<Result>,
     val listener: OnItemClickListener
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var itemView = LayoutInflater.from(context).inflate(R.layout.movie_item, parent, false)
@@ -49,7 +50,6 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
-//        holder.poster.startAnimation(AnimationUtils.loadAnimation(context, R.anim.recycler_animation))
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.recycler_animation))
         val movie = movieList[position]
 
@@ -63,5 +63,4 @@ class MovieAdapter(
     interface OnItemClickListener {
         fun onItemClick(movie: Result)
     }
-
 }

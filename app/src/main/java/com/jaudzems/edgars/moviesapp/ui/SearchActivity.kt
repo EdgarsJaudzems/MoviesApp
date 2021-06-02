@@ -1,4 +1,4 @@
-package com.jaudzems.edgars.moviesapp
+package com.jaudzems.edgars.moviesapp.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jaudzems.edgars.moviesapp.MovieData
+import com.jaudzems.edgars.moviesapp.Result
+import com.jaudzems.edgars.moviesapp.adapters.MovieAdapter
 import com.jaudzems.edgars.moviesapp.databinding.ActivitySearchBinding
 import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
 import com.jaudzems.edgars.moviesapp.network.RetrofitInterface

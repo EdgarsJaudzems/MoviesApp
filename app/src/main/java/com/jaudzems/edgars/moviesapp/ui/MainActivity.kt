@@ -1,4 +1,4 @@
-package com.jaudzems.edgars.moviesapp
+package com.jaudzems.edgars.moviesapp.ui
 
 import android.app.SearchManager
 import android.content.Context
@@ -6,11 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jaudzems.edgars.moviesapp.*
+import com.jaudzems.edgars.moviesapp.adapters.MovieAdapter
 import com.jaudzems.edgars.moviesapp.databinding.ActivityMainBinding
 import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
 import com.jaudzems.edgars.moviesapp.network.RetrofitInterface
@@ -86,6 +89,8 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         val searchItem = menu?.findItem(R.id.search)
         val searchView = searchItem?.actionView as SearchView
 
+        menu?.findItem(R.id.popular).setVisible(false)
+
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -94,13 +99,10 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
                 searchView.setQuery("", false)
                 searchItem.collapseActionView()
 
-//                Toast.makeText(this@MainActivity,"look $query", Toast.LENGTH_LONG).show()
-
                 startActivity(
                     Intent(this@MainActivity, SearchActivity::class.java)
                         .putExtra("search_query", query)
                 )
-
                 return true
             }
 
@@ -108,6 +110,20 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
                 return false
             }
         })
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.toprated -> {
+                val intent = Intent(this@MainActivity, TopRatedActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.upcoming -> {
+                val intent = Intent(this@MainActivity, UpcomingActivity::class.java)
+                startActivity(intent)
+            }
+        }
         return true
     }
 }

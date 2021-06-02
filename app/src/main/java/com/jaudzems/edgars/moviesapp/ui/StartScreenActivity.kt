@@ -1,10 +1,11 @@
-package com.jaudzems.edgars.moviesapp
+package com.jaudzems.edgars.moviesapp.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.jaudzems.edgars.moviesapp.R
 
 class StartScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,6 @@ class StartScreenActivity : AppCompatActivity() {
         madeBy.alpha = 0f
         author.animate().setDuration(2000).alpha(1f)
         madeBy.animate().setDuration(2000).alpha(1f)
-
 
         startScreenLogo.alpha = 0f
         startScreenLogo.animate().setDuration(1000).alpha(1f).rotationYBy(360f).withEndAction {

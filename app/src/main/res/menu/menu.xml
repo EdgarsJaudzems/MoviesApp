@@ -8,4 +8,29 @@
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+<!--    <item-->
+<!--        android:id="@+id/settings"-->
+<!--        android:title="Settings"-->
+<!--        android:icon="@drawable/ic_baseline_settings_24"-->
+<!--        app:showAsAction="ifRoom"/>-->
+
+    <item
+        android:id="@+id/popular"
+        android:title="Popular movies"
+        android:icon="@drawable/ic_baseline_movie_24"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/toprated"
+        android:title="Top Rated movies"
+        android:icon="@drawable/ic_baseline_local_play_24"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/upcoming"
+        android:title="Upcoming movies"
+        android:icon="@drawable/ic_baseline_fiber_new_24"
+        app:showAsAction="never"/>
+
 </menu>

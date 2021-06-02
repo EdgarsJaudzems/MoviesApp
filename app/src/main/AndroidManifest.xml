@@ -12,9 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoviesApp">
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".ui.TopRatedActivity"></activity>
+        <activity android:name=".ui.UpcomingActivity" />
+        <activity android:name=".ui.SearchActivity" />
         <activity
-            android:name=".StartScreenActivity"
+            android:name=".ui.StartScreenActivity"
             android:theme="@style/StartScreen.MoviesApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ui.DetailActivity" />
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

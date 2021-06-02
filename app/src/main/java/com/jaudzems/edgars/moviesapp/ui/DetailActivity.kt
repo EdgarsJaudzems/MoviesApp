@@ -1,4 +1,4 @@
-package com.jaudzems.edgars.moviesapp
+package com.jaudzems.edgars.moviesapp.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -33,8 +33,6 @@ class DetailActivity : AppCompatActivity() {
         loadIntentData()
         getSingleMovieDetailData(movieId)
         getSingleMovieTrailerData(movieId)
-
-
 
     }
 
