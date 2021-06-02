@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
 
         recyclerViewSetup()
         getPopularMovieData()
+
     }
 
     private fun recyclerViewSetup() {

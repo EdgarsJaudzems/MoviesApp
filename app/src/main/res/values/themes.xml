@@ -12,9 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
 
-    <style name="StartScreen.MoviesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="StartScreen.MoviesApp" parent="Theme.AppCompat.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#1564bf</item>
         <item name="colorPrimaryVariant">#003b8e</item>
