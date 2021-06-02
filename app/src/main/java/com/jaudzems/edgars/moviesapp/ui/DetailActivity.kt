@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.jaudzems.edgars.moviesapp.R
 import com.jaudzems.edgars.moviesapp.databinding.ActivityDetailBinding
 import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
 import com.jaudzems.edgars.moviesapp.network.RetrofitInterface
@@ -15,6 +17,7 @@ import com.jaudzems.edgars.moviesapp.network.SingleMoviedata
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.NumberFormat
 
 class DetailActivity : AppCompatActivity() {
 
@@ -50,7 +53,8 @@ class DetailActivity : AppCompatActivity() {
     private fun loadIntentData() {
         // Textview intents
         binding.movieTitleText.text = intent.getStringExtra("intent_movie_title")
-        binding.movieReleaseDateShort.text = "(${intent.getStringExtra("intent_movie_release_date")?.take(4)})"
+        binding.movieReleaseDateShort.text =
+            "(${intent.getStringExtra("intent_movie_release_date")?.take(4)})"
         binding.movieReleaseDateText.text = intent.getStringExtra("intent_movie_release_date")
         binding.movieOverviewText.text = intent.getStringExtra("intent_movie_overview")
         binding.movieVoteCountText.text =
@@ -61,16 +65,29 @@ class DetailActivity : AppCompatActivity() {
         // Image Load
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
-        val movieBackPoster = IMAGE_BASE + intent.getStringExtra("intent_movie_backdrop_poster")
-        val moviePoster = IMAGE_BASE + intent.getStringExtra("intent_movie_poster")
+        val backPosterIntent = intent.getStringExtra("intent_movie_backdrop_poster")
+        val movieBackPoster = IMAGE_BASE + backPosterIntent
 
-        Glide.with(this)
-            .load(movieBackPoster)
-            .into(binding.movieBackPoster)
+        val posterIntent = intent.getStringExtra("intent_movie_poster")
+        val moviePoster = IMAGE_BASE + posterIntent
 
-        Glide.with(this)
-            .load(moviePoster)
-            .into(binding.movieFrontPoster)
+        if (backPosterIntent == null) {
+            binding.movieBackPoster.setImageResource(R.drawable.dummy)
+        } else {
+            Glide.with(this)
+                .load(movieBackPoster)
+                .transition(GenericTransitionOptions.with(R.anim.glide_image))
+                .into(binding.movieBackPoster)
+        }
+
+        if (posterIntent == null) {
+            binding.movieFrontPoster.setImageResource(R.drawable.dummy)
+        } else {
+            Glide.with(this)
+                .load(moviePoster)
+                .into(binding.movieFrontPoster)
+
+        }
 
         //Button to movie website
         val MOVIE_BASE = "https://www.themoviedb.org/movie/"
@@ -110,7 +127,7 @@ class DetailActivity : AppCompatActivity() {
                 for (value in singleMovieResponse.genres) {
                     genre += value.name + ", "
                 }
-                var movieGenres = genre.dropLast(2)
+                val movieGenres = genre.dropLast(2)
                 binding.movieGenreText.text = movieGenres
 
                 //Language
@@ -118,22 +135,25 @@ class DetailActivity : AppCompatActivity() {
                 for (value in singleMovieResponse.spoken_languages) {
                     languages += value.name + ", "
                 }
-                var movieLanguages = languages.dropLast(2)
+                val movieLanguages = languages.dropLast(2)
                 binding.movieLanguagesText.text = movieLanguages
 
                 //Budget
                 if (singleMovieResponse.budget != 0) {
-                    binding.movieBudgetText.text = ("${singleMovieResponse.budget.toString()}$")
+                    val budget = singleMovieResponse.budget
+                    binding.movieBudgetText.text = ("${NumberFormat.getIntegerInstance().format(budget).toString()}$")
                 } else {
                     binding.movieBudgetText.text = "-"
                 }
 
                 //Revenue
                 if (singleMovieResponse.revenue != 0) {
-                    binding.movieRevenueText.text = ("${singleMovieResponse.revenue.toString()}$")
+                    val revenue = singleMovieResponse.revenue
+                    binding.movieRevenueText.text = ("${NumberFormat.getIntegerInstance().format(revenue).toString()}$")
                 } else {
                     binding.movieRevenueText.text = "-"
                 }
+
 
                 //Runtime
                 val runtime = singleMovieResponse.runtime
@@ -160,16 +180,20 @@ class DetailActivity : AppCompatActivity() {
             ) {
                 val trailerMovieResponse = response.body()!!
 
-                // Movie Trailer
-                binding.movieTrailerText.text = trailerMovieResponse.results[0].name
-                binding.yotubeButton.setOnClickListener {
-                    val youtubeUrl = "https://www.youtube.com/watch?v="
-                    val movieTrailerKey = trailerMovieResponse.results[0].key
-                    val trailerUrl = youtubeUrl + movieTrailerKey
+                if (trailerMovieResponse.results.isEmpty()) {
+                    binding.movieTrailerText.text = "No trailer available"
+                } else {
+                    // Movie Trailer
+                    binding.movieTrailerText.text = trailerMovieResponse.results[0].name
+                    binding.yotubeButton.setOnClickListener {
+                        val youtubeUrl = "https://www.youtube.com/watch?v="
+                        val movieTrailerKey = trailerMovieResponse.results[0].key
+                        val trailerUrl = youtubeUrl + movieTrailerKey
 
-                    val youtubeIntent = Intent(Intent.ACTION_VIEW)
-                    youtubeIntent.data = Uri.parse(trailerUrl)
-                    startActivity(youtubeIntent)
+                        val youtubeIntent = Intent(Intent.ACTION_VIEW)
+                        youtubeIntent.data = Uri.parse(trailerUrl)
+                        startActivity(youtubeIntent)
+                    }
                 }
             }
 

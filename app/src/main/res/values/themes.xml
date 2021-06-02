@@ -15,7 +15,7 @@
 
     </style>
 
-    <style name="StartScreen.MoviesApp" parent="Theme.AppCompat.DayNight">
+    <style name="StartScreen.MoviesApp" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#1564bf</item>
         <item name="colorPrimaryVariant">#003b8e</item>
