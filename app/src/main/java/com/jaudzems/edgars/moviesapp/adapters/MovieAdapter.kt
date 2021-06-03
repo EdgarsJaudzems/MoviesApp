@@ -19,7 +19,7 @@ class MovieAdapter(
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+        var itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_item_grid, parent, false)
 
         return ViewHolder(itemView)
     }

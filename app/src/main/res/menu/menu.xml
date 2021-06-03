@@ -9,11 +9,11 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
-<!--    <item-->
-<!--        android:id="@+id/settings"-->
-<!--        android:title="Settings"-->
-<!--        android:icon="@drawable/ic_baseline_settings_24"-->
-<!--        app:showAsAction="ifRoom"/>-->
+    <item
+        android:id="@+id/changeLayout"
+        android:title="Change layout"
+        android:icon="@drawable/ic_baseline_reorder_24"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/popular"

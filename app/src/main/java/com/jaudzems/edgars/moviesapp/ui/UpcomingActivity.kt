@@ -81,6 +81,7 @@ class UpcomingActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
                 .putExtra("intent_movie_popularity", movie.popularity)
                 .putExtra("intent_movie_vote_average", movie.vote_average)
         )
+        activityAnimation()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -106,6 +107,7 @@ class UpcomingActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
                     Intent(this@UpcomingActivity, SearchActivity::class.java)
                         .putExtra("search_query", query)
                 )
+                activityAnimation()
                 return true
             }
 
@@ -121,12 +123,23 @@ class UpcomingActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
             R.id.popular -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                activityAnimation()
             }
             R.id.toprated -> {
                 val intent = Intent(this, TopRatedActivity::class.java)
                 startActivity(intent)
+                activityAnimation()
             }
         }
         return true
+    }
+
+    fun activityAnimation() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaudzems.edgars.moviesapp.MovieData
+import com.jaudzems.edgars.moviesapp.R
 import com.jaudzems.edgars.moviesapp.Result
 import com.jaudzems.edgars.moviesapp.adapters.MovieAdapter
 import com.jaudzems.edgars.moviesapp.databinding.ActivitySearchBinding
@@ -88,5 +89,15 @@ class SearchActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
                 .putExtra("intent_movie_popularity", movie.popularity)
                 .putExtra("intent_movie_vote_average", movie.vote_average)
         )
+        activityAnimation()
+    }
+
+    fun activityAnimation() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }

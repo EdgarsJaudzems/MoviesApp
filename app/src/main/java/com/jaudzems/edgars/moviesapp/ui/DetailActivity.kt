@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
@@ -36,6 +37,14 @@ class DetailActivity : AppCompatActivity() {
         loadIntentData()
         getSingleMovieDetailData(movieId)
         getSingleMovieTrailerData(movieId)
+
+        //Animation
+        val topToBottomAnimation = AnimationUtils.loadAnimation(this, R.anim.top_to_bottom)
+        binding.movieTitleText.startAnimation(topToBottomAnimation)
+        binding.movieReleaseDateShort.startAnimation(topToBottomAnimation)
+
+        val topToBottomAnimation2 = AnimationUtils.loadAnimation(this, R.anim.top_to_bottom_2)
+        binding.movieDetails.startAnimation(topToBottomAnimation2)
 
     }
 
@@ -85,6 +94,7 @@ class DetailActivity : AppCompatActivity() {
         } else {
             Glide.with(this)
                 .load(moviePoster)
+                .transition(GenericTransitionOptions.with(R.anim.glide_image_2))
                 .into(binding.movieFrontPoster)
 
         }
@@ -99,6 +109,7 @@ class DetailActivity : AppCompatActivity() {
             val buttonIntent = Intent(Intent.ACTION_VIEW)
             buttonIntent.data = Uri.parse(url)
             startActivity(buttonIntent)
+            activityAnimation()
         }
     }
 
@@ -193,6 +204,7 @@ class DetailActivity : AppCompatActivity() {
                         val youtubeIntent = Intent(Intent.ACTION_VIEW)
                         youtubeIntent.data = Uri.parse(trailerUrl)
                         startActivity(youtubeIntent)
+                        activityAnimation()
                     }
                 }
             }
@@ -201,5 +213,14 @@ class DetailActivity : AppCompatActivity() {
                 Log.d("DetailActivity", "onFailure" + t.message)
             }
         })
+    }
+
+    fun activityAnimation() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }
