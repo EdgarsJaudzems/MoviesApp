@@ -4,11 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaudzems.edgars.moviesapp.R
 import com.jaudzems.edgars.moviesapp.databinding.ActivityDetailBinding
 import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
@@ -23,6 +25,7 @@ import java.text.NumberFormat
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var shareButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,9 @@ class DetailActivity : AppCompatActivity() {
 
         val topToBottomAnimation2 = AnimationUtils.loadAnimation(this, R.anim.top_to_bottom_2)
         binding.movieDetails.startAnimation(topToBottomAnimation2)
+
+        //
+//        shareButton()
 
     }
 
@@ -152,7 +158,8 @@ class DetailActivity : AppCompatActivity() {
                 //Budget
                 if (singleMovieResponse.budget != 0) {
                     val budget = singleMovieResponse.budget
-                    binding.movieBudgetText.text = ("${NumberFormat.getIntegerInstance().format(budget).toString()}$")
+                    binding.movieBudgetText.text =
+                        ("${NumberFormat.getIntegerInstance().format(budget).toString()}$")
                 } else {
                     binding.movieBudgetText.text = "-"
                 }
@@ -160,7 +167,8 @@ class DetailActivity : AppCompatActivity() {
                 //Revenue
                 if (singleMovieResponse.revenue != 0) {
                     val revenue = singleMovieResponse.revenue
-                    binding.movieRevenueText.text = ("${NumberFormat.getIntegerInstance().format(revenue).toString()}$")
+                    binding.movieRevenueText.text =
+                        ("${NumberFormat.getIntegerInstance().format(revenue).toString()}$")
                 } else {
                     binding.movieRevenueText.text = "-"
                 }
@@ -213,6 +221,30 @@ class DetailActivity : AppCompatActivity() {
                 Log.d("DetailActivity", "onFailure" + t.message)
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val inflater = menuInflater
+        inflater.inflate(R.menu.detail_menu, menu)
+
+        val shareButton = menu?.findItem(R.id.shareButton)
+
+        if (shareButton != null) {
+            shareButton.setOnMenuItemClickListener {
+                val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Hey Check out this great movie!"
+            )
+            shareIntent.type = "text/plain"
+            startActivity(shareIntent)
+
+                return@setOnMenuItemClickListener true
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     fun activityAnimation() {

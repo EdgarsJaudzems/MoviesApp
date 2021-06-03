@@ -10,12 +10,6 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
     <item
-        android:id="@+id/changeLayout"
-        android:title="Change layout"
-        android:icon="@drawable/ic_baseline_reorder_24"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/popular"
         android:title="Popular movies"
         android:icon="@drawable/ic_baseline_movie_24"
