@@ -13,10 +13,8 @@ import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaudzems.edgars.moviesapp.R
 import com.jaudzems.edgars.moviesapp.databinding.ActivityDetailBinding
-import com.jaudzems.edgars.moviesapp.network.RetrofitInstance
-import com.jaudzems.edgars.moviesapp.network.RetrofitInterface
-import com.jaudzems.edgars.moviesapp.network.SingleMovieTrailer
-import com.jaudzems.edgars.moviesapp.network.SingleMoviedata
+import com.jaudzems.edgars.moviesapp.network.*
+import kotlinx.android.synthetic.main.activity_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +24,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var shareButton: FloatingActionButton
+    private lateinit var movieBackposterUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +34,15 @@ class DetailActivity : AppCompatActivity() {
         //MovieId Intent
         val movieId = intent.getIntExtra("intent_movie_id", 578701).toString()
 
+        //Movie Backposter For Actor Activity
+
+
         //Setup
         setupHeaderToolbar()
         loadIntentData()
         getSingleMovieDetailData(movieId)
         getSingleMovieTrailerData(movieId)
+        getSingleMovieCrew(movieId)
 
         //Animation
         val topToBottomAnimation = AnimationUtils.loadAnimation(this, R.anim.top_to_bottom)
@@ -48,9 +51,6 @@ class DetailActivity : AppCompatActivity() {
 
         val topToBottomAnimation2 = AnimationUtils.loadAnimation(this, R.anim.top_to_bottom_2)
         binding.movieDetails.startAnimation(topToBottomAnimation2)
-
-        //
-//        shareButton()
 
     }
 
@@ -81,7 +81,10 @@ class DetailActivity : AppCompatActivity() {
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
         val backPosterIntent = intent.getStringExtra("intent_movie_backdrop_poster")
-        val movieBackPoster = IMAGE_BASE + backPosterIntent
+        var movieBackPoster = IMAGE_BASE + backPosterIntent
+
+        //Preparing backposter for
+        movieBackposterUrl = movieBackPoster
 
         val posterIntent = intent.getStringExtra("intent_movie_poster")
         val moviePoster = IMAGE_BASE + posterIntent
@@ -173,7 +176,6 @@ class DetailActivity : AppCompatActivity() {
                     binding.movieRevenueText.text = "-"
                 }
 
-
                 //Runtime
                 val runtime = singleMovieResponse.runtime
                 val runtimeHours = runtime / 60
@@ -218,6 +220,132 @@ class DetailActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SingleMovieTrailer?>, t: Throwable) {
+                Log.d("DetailActivity", "onFailure" + t.message)
+            }
+        })
+    }
+
+    private fun getSingleMovieCrew(movieId: String) {
+        val retrofitInstance =
+            RetrofitInstance.getRetrofitInstance().create(RetrofitInterface::class.java)
+        val call = retrofitInstance.getCrew(movieId)
+
+        call.enqueue(object : Callback<SingleMovieCrew?> {
+            override fun onResponse(
+                call: Call<SingleMovieCrew?>,
+                response: Response<SingleMovieCrew?>
+            ) {
+                val crewResponse = response.body()!!
+
+                // Actors
+                binding.crew1.text = crewResponse.cast[0].name
+                binding.crew2.text = crewResponse.cast[1].name
+                binding.crew3.text = crewResponse.cast[2].name
+                binding.crew4.text = crewResponse.cast[3].name
+                binding.crew5.text = crewResponse.cast[4].name
+                binding.crew6.text = crewResponse.cast[5].name
+
+                // Actors Image Load
+                val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
+
+                val actor1 = IMAGE_BASE + crewResponse.cast[0].profile_path
+                val actor2 = IMAGE_BASE + crewResponse.cast[1].profile_path
+                val actor3 = IMAGE_BASE + crewResponse.cast[2].profile_path
+                val actor4 = IMAGE_BASE + crewResponse.cast[3].profile_path
+                val actor5 = IMAGE_BASE + crewResponse.cast[4].profile_path
+                val actor6 = IMAGE_BASE + crewResponse.cast[5].profile_path
+
+//                if (backPosterIntent == null) {
+//                    binding.movieBackPoster.setImageResource(R.drawable.dummy)
+//                } else {
+//                    Glide.with(this)
+//                        .load(movieBackPoster)
+//                        .transition(GenericTransitionOptions.with(R.anim.glide_image))
+//                        .into(binding.movieBackPoster)
+//                }
+
+                Glide.with(this@DetailActivity)
+                    .load(actor1)
+                    .into(binding.actorImage1)
+
+                Glide.with(this@DetailActivity)
+                    .load(actor2)
+                    .into(binding.actorImage2)
+
+                Glide.with(this@DetailActivity)
+                    .load(actor3)
+                    .into(binding.actorImage3)
+
+                Glide.with(this@DetailActivity)
+                    .load(actor4)
+                    .into(binding.actorImage4)
+
+                Glide.with(this@DetailActivity)
+                    .load(actor5)
+                    .into(binding.actorImage5)
+
+                Glide.with(this@DetailActivity)
+                    .load(actor6)
+                    .into(binding.actorImage6)
+
+                //Actors intents
+
+                binding.actorImage1.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
+                        .putExtra("actorId", crewResponse.cast[0].id)
+                        .putExtra("actorName", crewResponse.cast[0].name)
+                        .putExtra("backPoster",movieBackposterUrl)
+                    startActivity(intent)
+                    activityAnimation()
+                }
+
+                binding.actorImage2.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
+                        .putExtra("actorId", crewResponse.cast[1].id)
+                        .putExtra("actorName", crewResponse.cast[1].name)
+                        .putExtra("backPoster",movieBackposterUrl)
+                    startActivity(intent)
+                    activityAnimation()
+                }
+
+                binding.actorImage3.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
+                        .putExtra("actorId", crewResponse.cast[2].id)
+                        .putExtra("actorName", crewResponse.cast[2].name)
+                        .putExtra("backPoster",movieBackposterUrl)
+                    startActivity(intent)
+                    activityAnimation()
+                }
+
+                binding.actorImage4.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
+                        .putExtra("actorId", crewResponse.cast[3].id)
+                        .putExtra("actorName", crewResponse.cast[3].name)
+                        .putExtra("backPoster",movieBackposterUrl)
+                    startActivity(intent)
+                    activityAnimation()
+                }
+
+                binding.actorImage5.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
+                        .putExtra("actorId", crewResponse.cast[4].id)
+                        .putExtra("actorName", crewResponse.cast[4].name)
+                        .putExtra("backPoster",movieBackposterUrl)
+                    startActivity(intent)
+                    activityAnimation()
+                }
+
+                binding.actorImage6.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
+                        .putExtra("actorId", crewResponse.cast[5].id)
+                        .putExtra("actorName", crewResponse.cast[5].name)
+                        .putExtra("backPoster",movieBackposterUrl)
+                    startActivity(intent)
+                    activityAnimation()
+                }
+            }
+
+            override fun onFailure(call: Call<SingleMovieCrew?>, t: Throwable) {
                 Log.d("DetailActivity", "onFailure" + t.message)
             }
         })

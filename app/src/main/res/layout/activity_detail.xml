@@ -11,17 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/movie_back_poster"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewPosterBig"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="260dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+            android:layout_height="match_parent"
+            app:cardElevation="15dp">
+
+            <ImageView
+                android:id="@+id/movie_back_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="260dp"
+                android:scaleType="fitXY"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_background" />
+
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/movie_front_poster"
@@ -49,7 +59,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movie_back_poster" />
+            app:layout_constraintTop_toBottomOf="@+id/cardviewPosterBig" />
 
         <TextView
             android:id="@+id/movie_release_date_short"
@@ -135,12 +145,9 @@
             android:id="@+id/movie_details_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="1dp"
-            app:contentPadding="1dp"
+            app:cardElevation="7dp"
+            android:backgroundTint="?attr/cardBackgroundColorCustom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -220,7 +227,6 @@
                     app:layout_constraintHorizontal_bias="0.541"
                     app:layout_constraintStart_toEndOf="@+id/movie_release_date"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -340,44 +346,73 @@
             app:layout_constraintStart_toStartOf="@+id/movie_revenue"
             app:layout_constraintTop_toBottomOf="@+id/movie_revenue" />
 
-
-        <TextView
-            android:id="@+id/movie_id"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewLink"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="More on Official TMDB website"
-            android:textSize="16sp"
+            android:backgroundTint="?attr/cardBackgroundColorCustom"
+            app:cardElevation="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crew_6">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/movie_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="More on Official TMDB website"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/movie_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="#00000000"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/tmdb"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/movie_id" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/movie_crew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:text="Top Billed Cast"
+            android:textAlignment="center"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardviewYoutube" />
 
-
-        <ImageButton
-            android:id="@+id/movie_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="24dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/tmdb"
-            android:backgroundTint="#00000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/movie_id"
-            app:layout_constraintStart_toStartOf="@+id/movie_id"
-            app:layout_constraintTop_toBottomOf="@+id/movie_id"
-            app:layout_constraintVertical_bias="1.0" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardviewYoutube"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:padding="16dp"
-            app:cardElevation="1dp"
-            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp"
+            android:backgroundTint="?attr/cardBackgroundColorCustom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_front_poster">
@@ -393,7 +428,6 @@
                     android:id="@+id/movie_trailer_text"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
@@ -422,6 +456,157 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/crew_1"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Actor 1"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/actor_image_1"
+            app:layout_constraintStart_toStartOf="@+id/actor_image_1"
+            app:layout_constraintTop_toBottomOf="@+id/actor_image_1" />
+
+        <TextView
+            android:id="@+id/crew_2"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Actor 2"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/actor_image_2"
+            app:layout_constraintStart_toStartOf="@+id/actor_image_2"
+            app:layout_constraintTop_toBottomOf="@+id/actor_image_2" />
+
+        <TextView
+            android:id="@+id/crew_3"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Actor 3"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/actor_image_3"
+            app:layout_constraintStart_toStartOf="@+id/actor_image_3"
+            app:layout_constraintTop_toBottomOf="@+id/actor_image_3" />
+
+        <TextView
+            android:id="@+id/crew_4"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Actor 4"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/actor_image_4"
+            app:layout_constraintStart_toStartOf="@+id/actor_image_4"
+            app:layout_constraintTop_toBottomOf="@+id/actor_image_4" />
+
+        <TextView
+            android:id="@+id/crew_5"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Actor 5"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/actor_image_5"
+            app:layout_constraintStart_toStartOf="@+id/actor_image_5"
+            app:layout_constraintTop_toBottomOf="@+id/actor_image_5" />
+
+        <TextView
+            android:id="@+id/crew_6"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Actor 6"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/actor_image_6"
+            app:layout_constraintStart_toStartOf="@+id/actor_image_6"
+            app:layout_constraintTop_toBottomOf="@+id/actor_image_6" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/actor_image_1"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:scaleType="fitXY"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_crew"
+            app:shapeAppearanceOverlay="@style/RoundedMaximum" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/actor_image_2"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:scaleType="fitXY"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_crew"
+            app:shapeAppearanceOverlay="@style/RoundedMaximum" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/actor_image_3"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:scaleType="fitXY"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_crew"
+            app:shapeAppearanceOverlay="@style/RoundedMaximum" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/actor_image_4"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:scaleType="fitXY"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crew_2"
+            app:shapeAppearanceOverlay="@style/RoundedMaximum" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/actor_image_5"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:scaleType="fitXY"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crew_2"
+            app:shapeAppearanceOverlay="@style/RoundedMaximum" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/actor_image_6"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:scaleType="fitXY"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crew_2"
+            app:shapeAppearanceOverlay="@style/RoundedMaximum" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

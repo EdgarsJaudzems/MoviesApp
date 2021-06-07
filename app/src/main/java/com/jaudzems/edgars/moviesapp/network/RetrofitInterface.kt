@@ -27,4 +27,10 @@ interface RetrofitInterface {
     fun searchMovies(
         @Query("api_key") apiKey: String,
         @Query("query") query: String) : Call<MovieData>
+
+    @GET("3/movie/{movieId}/credits?api_key=73619d549f33ccdf0116452a1f3f9427")
+    fun getCrew(@Path("movieId") movieId: String): Call<SingleMovieCrew>
+
+    @GET("3/person/{actorId}?api_key=73619d549f33ccdf0116452a1f3f9427")
+    fun getActorDetails(@Path("actorId") actorId: String): Call<ActorDetailData>
 }

@@ -8,4 +8,9 @@
         <item name="cornerSize">2.5%</item>
     </style>
 
+    <style name="RoundedMaximum">
+        <item name="cornerSize">5%</item>
+    </style>
+
+
 </resources>
