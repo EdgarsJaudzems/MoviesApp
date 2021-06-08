@@ -70,7 +70,7 @@ class ActorProfileActivity : AppCompatActivity() {
                 val actorProfilePhoto = IMAGE_BASE + actorData.profile_path
 
                 if (actorData.profile_path == null) {
-                    binding.actorImage.setImageResource(R.drawable.dummy)
+                    binding.actorImage.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@ActorProfileActivity)
                         .load(actorProfilePhoto)
@@ -104,8 +104,10 @@ class ActorProfileActivity : AppCompatActivity() {
 
                 //Button to movie website actors page
                 val MOVIE_BASE = "https://www.themoviedb.org/person/"
+                val buttonAnimation = AnimationUtils.loadAnimation(this@ActorProfileActivity, R.anim.button_anim)
 
                 binding.actorButton.setOnClickListener {
+                    binding.actorButton.startAnimation(buttonAnimation)
                     val url = MOVIE_BASE + actorId
 
                     val buttonIntent = Intent(Intent.ACTION_VIEW)

@@ -107,7 +107,10 @@ class DetailActivity : AppCompatActivity() {
         }
 
         //Button to movie website
+        val buttonAnimation = AnimationUtils.loadAnimation(this@DetailActivity, R.anim.button_anim)
+
         binding.movieButton.setOnClickListener {
+            binding.movieButton.startAnimation(buttonAnimation)
             val movieId = intent.getIntExtra("intent_movie_id", 578701).toString()
             val url = MOVIE_BASE + movieId
 
@@ -202,8 +205,11 @@ class DetailActivity : AppCompatActivity() {
                 } else {
 
                     // Movie Trailer
+                    val buttonAnimation = AnimationUtils.loadAnimation(this@DetailActivity, R.anim.button_anim)
+
                     binding.movieTrailerText.text = trailerMovieResponse.results[0].name
-                    binding.yotubeButton.setOnClickListener {
+                    binding.youtubeButton.setOnClickListener {
+                        binding.youtubeButton.startAnimation(buttonAnimation)
                         val youtubeUrl = "https://www.youtube.com/watch?v="
                         val movieTrailerKey = trailerMovieResponse.results[0].key
                         val trailerUrl = youtubeUrl + movieTrailerKey
@@ -251,7 +257,7 @@ class DetailActivity : AppCompatActivity() {
                 val actor6 = IMAGE_BASE + crewResponse.cast[5].profile_path
 
                 if (crewResponse.cast[0].profile_path == null) {
-                    binding.actorImage1.setImageResource(R.drawable.dummy)
+                    binding.actorImage1.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@DetailActivity)
                         .load(actor1)
@@ -259,7 +265,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 if (crewResponse.cast[1].profile_path == null) {
-                    binding.actorImage2.setImageResource(R.drawable.dummy)
+                    binding.actorImage2.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@DetailActivity)
                         .load(actor2)
@@ -267,7 +273,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 if (crewResponse.cast[2].profile_path == null) {
-                    binding.actorImage3.setImageResource(R.drawable.dummy)
+                    binding.actorImage3.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@DetailActivity)
                         .load(actor3)
@@ -275,7 +281,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 if (crewResponse.cast[3].profile_path == null) {
-                    binding.actorImage4.setImageResource(R.drawable.dummy)
+                    binding.actorImage4.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@DetailActivity)
                         .load(actor4)
@@ -283,7 +289,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 if (crewResponse.cast[4].profile_path == null) {
-                    binding.actorImage5.setImageResource(R.drawable.dummy)
+                    binding.actorImage5.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@DetailActivity)
                         .load(actor5)
@@ -291,7 +297,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 if (crewResponse.cast[5].profile_path == null) {
-                    binding.actorImage6.setImageResource(R.drawable.dummy)
+                    binding.actorImage6.setImageResource(R.drawable.dummy_profile_image)
                 } else {
                     Glide.with(this@DetailActivity)
                         .load(actor6)
@@ -299,16 +305,21 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 //Actors intents
+                val buttonAnimation = AnimationUtils.loadAnimation(this@DetailActivity, R.anim.button_anim)
+
                 binding.actorImage1.setOnClickListener {
+                    binding.actorImage1.startAnimation(buttonAnimation)
                     val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
                         .putExtra("actorId", crewResponse.cast[0].id)
                         .putExtra("actorName", crewResponse.cast[0].name)
                         .putExtra("backPoster", movieBackposter)
                     startActivity(intent)
+
                     activityAnimation()
                 }
 
                 binding.actorImage2.setOnClickListener {
+                    binding.actorImage2.startAnimation(buttonAnimation)
                     val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
                         .putExtra("actorId", crewResponse.cast[1].id)
                         .putExtra("actorName", crewResponse.cast[1].name)
@@ -318,6 +329,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 binding.actorImage3.setOnClickListener {
+                    binding.actorImage3.startAnimation(buttonAnimation)
                     val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
                         .putExtra("actorId", crewResponse.cast[2].id)
                         .putExtra("actorName", crewResponse.cast[2].name)
@@ -327,6 +339,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 binding.actorImage4.setOnClickListener {
+                    binding.actorImage4.startAnimation(buttonAnimation)
                     val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
                         .putExtra("actorId", crewResponse.cast[3].id)
                         .putExtra("actorName", crewResponse.cast[3].name)
@@ -336,6 +349,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 binding.actorImage5.setOnClickListener {
+                    binding.actorImage5.startAnimation(buttonAnimation)
                     val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
                         .putExtra("actorId", crewResponse.cast[4].id)
                         .putExtra("actorName", crewResponse.cast[4].name)
@@ -345,6 +359,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 binding.actorImage6.setOnClickListener {
+                    binding.actorImage6.startAnimation(buttonAnimation)
                     val intent = Intent(this@DetailActivity, ActorProfileActivity::class.java)
                         .putExtra("actorId", crewResponse.cast[5].id)
                         .putExtra("actorName", crewResponse.cast[5].name)
