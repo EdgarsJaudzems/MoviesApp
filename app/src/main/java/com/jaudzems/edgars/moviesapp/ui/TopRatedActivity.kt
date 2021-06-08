@@ -93,7 +93,6 @@ class TopRatedActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         val searchView = searchItem?.actionView as SearchView
 
         menu?.findItem(R.id.toprated).setVisible(false)
-
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -1,9 +1,12 @@
 package com.jaudzems.edgars.moviesapp.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.jaudzems.edgars.moviesapp.R
 import com.jaudzems.edgars.moviesapp.databinding.ActivityActorProfileBinding
@@ -17,6 +20,7 @@ import retrofit2.Response
 class ActorProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityActorProfileBinding
+    private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +29,21 @@ class ActorProfileActivity : AppCompatActivity() {
 
         val actorId = intent.getIntExtra("actorId", 578701).toString()
 
-
         setupHeaderToolbar()
         getActorData(actorId)
         loadBackPoster()
-
     }
 
     private fun loadBackPoster() {
         val movieBackPoster = intent.getStringExtra("backPoster")
-        Glide.with(this@ActorProfileActivity)
-            .load(movieBackPoster)
-            .into(binding.actorBackPoster)
+        val actorMovieBackPoster = IMAGE_BASE + movieBackPoster
+        if (movieBackPoster == "") {
+            binding.actorBackPoster.setImageResource(R.drawable.dummy)
+        } else {
+            Glide.with(this@ActorProfileActivity)
+                .load(actorMovieBackPoster)
+                .into(binding.actorBackPoster)
+        }
     }
 
     private fun getActorData(actorId: String) {
@@ -53,32 +60,59 @@ class ActorProfileActivity : AppCompatActivity() {
 
                 //Name
                 binding.actorNameLastname.text = actorData.name
+                val topToBottomAnimation = AnimationUtils.loadAnimation(
+                    this@ActorProfileActivity,
+                    R.anim.top_to_bottom_actor
+                )
+                binding.actorNameLastname.startAnimation(topToBottomAnimation)
 
                 //Actors Image Load
-                val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
                 val actorProfilePhoto = IMAGE_BASE + actorData.profile_path
 
-                Glide.with(this@ActorProfileActivity)
-                    .load(actorProfilePhoto)
-                    .into(binding.actorImage)
-
-                //Birthday
-                binding.actorBirthdayText.text = actorData.birthday
-
-                //Deathday
-                if (actorData.deathday != null) {
-                    binding.actorDeathdayText.text = actorData.deathday.toString()
+                if (actorData.profile_path == null) {
+                    binding.actorImage.setImageResource(R.drawable.dummy)
                 } else {
-                    binding.actorDeathday.visibility = View.GONE
-                    binding.actorDeathdayText.visibility = View.GONE
+                    Glide.with(this@ActorProfileActivity)
+                        .load(actorProfilePhoto)
+                        .transition(GenericTransitionOptions.with(R.anim.glide_image))
+                        .into(binding.actorImage)
                 }
 
-                //Place
-                binding.actorPlaceOfBirthText.text = actorData.place_of_birth
+                //Birthday
+                if (actorData.birthday != null) {
+                    binding.actorBirthdayText.text = actorData.birthday
+                } else {
+                    binding.actorBirthdayText.text = "-"
+                }
+
+                //Birth Place
+                if (actorData.place_of_birth != null) {
+                    binding.actorPlaceOfBirthText.text = actorData.place_of_birth
+                }
 
                 //Biography
-                binding.actorBiographyText.text = actorData.biography
+                if (actorData.biography == "") {
+                    binding.actorBiographyText.text = "No information"
+                } else {
+                    binding.actorBiographyText.text = actorData.biography
+                    val topToBottomAnimation = AnimationUtils.loadAnimation(
+                        this@ActorProfileActivity,
+                        R.anim.top_to_bottom_actor_2
+                    )
+                    binding.actorBiographyText.startAnimation(topToBottomAnimation)
+                }
 
+                //Button to movie website actors page
+                val MOVIE_BASE = "https://www.themoviedb.org/person/"
+
+                binding.actorButton.setOnClickListener {
+                    val url = MOVIE_BASE + actorId
+
+                    val buttonIntent = Intent(Intent.ACTION_VIEW)
+                    buttonIntent.data = Uri.parse(url)
+                    startActivity(buttonIntent)
+                    activityAnimation()
+                }
             }
 
             override fun onFailure(call: Call<ActorDetailData?>, t: Throwable) {
@@ -101,5 +135,9 @@ class ActorProfileActivity : AppCompatActivity() {
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    fun activityAnimation() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }

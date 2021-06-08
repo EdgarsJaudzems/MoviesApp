@@ -94,7 +94,6 @@ class UpcomingActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         val searchView = searchItem?.actionView as SearchView
 
         menu?.findItem(R.id.upcoming).setVisible(false)
-
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

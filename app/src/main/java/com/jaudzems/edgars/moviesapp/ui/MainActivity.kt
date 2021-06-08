@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
 
         recyclerViewSetup()
         getPopularMovieData()
-
     }
 
     private fun recyclerViewSetup() {
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu,menu)
+        inflater.inflate(R.menu.menu, menu)
 
         val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = menu?.findItem(R.id.search)
@@ -117,7 +116,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.toprated -> {
                 val intent = Intent(this@MainActivity, TopRatedActivity::class.java)
                 startActivity(intent)
