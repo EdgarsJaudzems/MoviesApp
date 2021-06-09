@@ -3,6 +3,7 @@
 Minimalist android movie app built using Kotlin and The Movie Database API.
 
 ## Video presentation - Youtube
+Click on image to watch a 2min long video presentation
 
 <div align="left">
   <a href="https://youtu.be/VsN57pq8CFw">
