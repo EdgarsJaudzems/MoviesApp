@@ -2,8 +2,16 @@
 
 Minimalist android movie app built using Kotlin and The Movie Database API.
 
-## Video presentation (1min)
+## Video presentation - Youtube
 
+<div align="left">
+  <a href="https://youtu.be/VsN57pq8CFw">
+    <img
+     src="https://i9.ytimg.com/vi/VsN57pq8CFw/mq1.jpg?sqp=CMDagoYG&rs=AOn4CLAKvQMBb9mo3DELxBG11WLZmXzF_w"
+         alt="Movies App TMDB"
+         style="width:200%;">
+  </a>
+  </div>
 
 
 
