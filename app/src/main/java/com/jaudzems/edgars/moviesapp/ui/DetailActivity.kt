@@ -75,7 +75,7 @@ class DetailActivity : AppCompatActivity() {
 
         // Image Load
         val backPosterIntent = intent.getStringExtra("intent_movie_backdrop_poster")
-        var movieBackPoster = IMAGE_BASE + backPosterIntent
+        val movieBackPoster = IMAGE_BASE + backPosterIntent
 
         //Back Poster for ActorProfileActivity
         if (backPosterIntent != null) {
@@ -161,7 +161,7 @@ class DetailActivity : AppCompatActivity() {
                 if (singleMovieResponse.budget != 0) {
                     val budget = singleMovieResponse.budget
                     binding.movieBudgetText.text =
-                        ("${NumberFormat.getIntegerInstance().format(budget).toString()}$")
+                        ("${NumberFormat.getIntegerInstance().format(budget)}$")
                 } else {
                     binding.movieBudgetText.text = "-"
                 }
@@ -170,7 +170,7 @@ class DetailActivity : AppCompatActivity() {
                 if (singleMovieResponse.revenue != 0) {
                     val revenue = singleMovieResponse.revenue
                     binding.movieRevenueText.text =
-                        ("${NumberFormat.getIntegerInstance().format(revenue).toString()}$")
+                        ("${NumberFormat.getIntegerInstance().format(revenue)}$")
                 } else {
                     binding.movieRevenueText.text = "-"
                 }
@@ -246,7 +246,11 @@ class DetailActivity : AppCompatActivity() {
                 binding.crew3.text = crewResponse.cast[2].name
                 binding.crew4.text = crewResponse.cast[3].name
                 binding.crew5.text = crewResponse.cast[4].name
-                binding.crew6.text = crewResponse.cast[5].name
+                if (crewResponse.cast[5].name != null) {
+                    binding.crew6.text = crewResponse.cast[5].name
+                } else {
+                    binding.crew6.text = "No name"
+                }
 
                 // Actors Image Load
                 val actor1 = IMAGE_BASE + crewResponse.cast[0].profile_path

@@ -89,12 +89,13 @@
 
         <TextView
             android:id="@+id/movie_tagline_text"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="Movie Tagline Text"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movie_tagline"
             app:layout_constraintTop_toBottomOf="@+id/movie_tagline" />
 
         <TextView
@@ -134,10 +135,12 @@
 
         <TextView
             android:id="@+id/movie_genre_text"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="Movie Genre Text"
             android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movie_genre"
             app:layout_constraintTop_toBottomOf="@+id/movie_genre" />
 
@@ -319,10 +322,12 @@
 
         <TextView
             android:id="@+id/movie_languages_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="Spoken languages text"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movie_languages"
             app:layout_constraintTop_toBottomOf="@+id/movie_languages" />
 
@@ -459,7 +464,7 @@
 
         <TextView
             android:id="@+id/crew_1"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Actor 1"
@@ -470,7 +475,7 @@
 
         <TextView
             android:id="@+id/crew_2"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Actor 2"
@@ -481,7 +486,7 @@
 
         <TextView
             android:id="@+id/crew_3"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Actor 3"
@@ -492,7 +497,7 @@
 
         <TextView
             android:id="@+id/crew_4"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Actor 4"
@@ -503,7 +508,7 @@
 
         <TextView
             android:id="@+id/crew_5"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Actor 5"
@@ -514,7 +519,7 @@
 
         <TextView
             android:id="@+id/crew_6"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Actor 6"
